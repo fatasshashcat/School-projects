@@ -1,3 +1,6 @@
+# Author: Sebastian Aguilar
+# Description: A program that simulates an RLC-circuit. It lets the user make some inputs and the program plots the transfer functions. 
+
 import numpy as np
 import matplotlib.pyplot as plt
 from tkinter import *
@@ -21,9 +24,9 @@ def trans_func_res(w, L, C, R):
     H_R =  R/np.sqrt(R ** 2 + ((1 / (w * C)) - w * L) ** 2)
     return H_R
 
-# Funktion för att plotta lösningar med val av parametrar
+
 def plot_solutions(L, C, R):
-    # Uppdatera lösningar med nya parametrar
+    
     U0 = 1  # Spänning vid t=0
     f = 127
     w = 2 * np.pi * f
@@ -102,52 +105,47 @@ def plot_transfer_functions():
     plt.grid(True)
     plt.show()
 
-# Funktion för att visa dialogruta och plotta baserat på användarens val
 def show_plot():
-    # Skapa en Tkinter-fönster
     root = Tk()
     root.title("Plotta grafer")
 
-    # Funktion för att hantera valda parametrar och plotta lösningar
     def plot_solutions_with_params():
         L = float(L_entry.get())
         C = float(C_entry.get())
         R = float(R_entry.get())
         plot_solutions(L, C, R)
 
-    # Skapa en etikett för parametrar
     param_label = Label(root, text="Ange värden för L, C och R:")
     param_label.pack()
 
-    # Skapa inmatningsfält för parametrar med förinställda standardvärden
     L_label = Label(root, text="L:")
     L_label.pack()
     L_entry = Entry(root)
-    L_entry.insert(0, '0.053')  # Förinställt standardvärde för L
+    L_entry.insert(0, '0.053')  
     L_entry.pack()
 
     C_label = Label(root, text="C:")
     C_label.pack()
     C_entry = Entry(root)
-    C_entry.insert(0, '0.000065')  # Förinställt standardvärde för C
+    C_entry.insert(0, '0.000065') 
     C_entry.pack()
 
     R_label = Label(root, text="R:")
     R_label.pack()
     R_entry = Entry(root)
-    R_entry.insert(0, '10')  # Förinställt standardvärde för R
+    R_entry.insert(0, '10')  
     R_entry.pack()
 
-    # Skapa en knapp för att plotta lösningar med angivna parametrar
+  
     plot_button = Button(root, text="Plotta lösningar", command=plot_solutions_with_params)
     plot_button.pack()
 
-    # Skapa en knapp för att plotta överföringsfunktioner
+  
     transfer_functions_button = Button(root, text="Plotta överföringsfunktioner", command=plot_transfer_functions)
     transfer_functions_button.pack()
 
-    # Visa fönstret
+ 
     root.mainloop()
 
-# Visa dialogruta och plotta baserat på användarens val
+
 show_plot()
